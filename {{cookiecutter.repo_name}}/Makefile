@@ -6,6 +6,7 @@ help:
 	@echo "clean-pyc    - remove Python file artifacts"
 	@echo "test         - run tests quickly with the default Python"
 	@echo "test-all     - run tests on every Python version with tox"
+	@echo "coverage     - check code coverage quickly with the default Python"
 	@echo "dist         - package"
 	@echo "install      - install the package to the active Python's site-packages"
 	@echo "release      - package and upload a release to PyPI"
@@ -17,9 +18,9 @@ help:
 clean: clean-build clean-pyc clean-test
 
 clean-build:
-	rm -fr build/
-	rm -fr dist/
-	rm -fr .eggs/
+	rm -rf build/
+	rm -rf dist/
+	rm -rf .eggs/
 	find . -name '*.egg-info' -exec rm -fr {} +
 	find . -name '*.egg' -exec rm -f {} +
 
@@ -30,13 +31,21 @@ clean-pyc:
 	find . -name '__pycache__' -exec rm -fr {} +
 
 clean-test:
-	rm -fr .tox/
+	rm -rf .tox/
+	rm -f .coverage
+	rm -rf htmlcov/
 
 test:
 	python setup.py test
 
 test-all:
 	tox
+
+coverage:
+	coverage run --source {{ cookiecutter.repo_name }} setup.py test
+	coverage report -m
+	coverage html
+	open htmlcov/index.html
 
 release: clean
 	python setup.py sdist upload
