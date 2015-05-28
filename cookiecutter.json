@@ -1,10 +1,10 @@
 {
-    "full_name": "Christoph Diehl",
-    "email": "cdiehl@mozilla.com",
-    "github_username": "posidron",
-    "repo_name": "quokka",
+    "full_name": "",
+    "email": "",
+    "github_username": "",
+    "repo_name": "newproject",
     "app_license": "MPL 2.0",
-    "app_name": "Quokka",
-    "app_short_description": "None",
+    "app_name": "NewProject",
+    "app_short_description": "A new project in Python",
     "app_version": "0.1.0"
 }
