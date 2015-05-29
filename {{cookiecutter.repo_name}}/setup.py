@@ -39,7 +39,7 @@ setuptools.setup(
     include_package_data = True,
     install_requires = requirements,
     license = "{{cookiecutter.app_license}}",
-    keywords = ['{{cookiecutter.repo_name}}'],
+    keywords = '{{cookiecutter.repo_name}}',
     classifiers = [
         # https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Intended Audience :: Developers',
