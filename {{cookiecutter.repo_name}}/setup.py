@@ -8,23 +8,21 @@ import os
 import setuptools
 
 
+readme = ''
 if os.path.exists('README.md'):
     with open('README.md') as readme_file:
         readme = readme_file.read()
-else:
-        readme = ''
 
+changes = ''
 if os.path.exists('CHANGES.md'):
     with open('CHANGES.md') as changes_file:
         changes = changes_file.read()
-else:
-        changes = ''
 
+requirements = []
 with open('requirements.txt') as requirements_file:
     requirements = requirements_file.readlines()
 
 test_requirements = []
-
 
 setuptools.setup(
     name = '{{cookiecutter.repo_name}}',
@@ -38,6 +36,11 @@ setuptools.setup(
     package_dir = {'{{cookiecutter.repo_name}}': '{{cookiecutter.repo_name}}'},
     include_package_data = True,
     install_requires = requirements,
+    entry_points = {
+        'console_scripts': [
+            '{{cookiecutter.repo_name}} = {{cookiecutter.repo_name}}.{{cookiecutter.repo_name}}:main',
+        ]
+    },
     license = "{{cookiecutter.app_license}}",
     keywords = '{{cookiecutter.repo_name}}',
     classifiers = [

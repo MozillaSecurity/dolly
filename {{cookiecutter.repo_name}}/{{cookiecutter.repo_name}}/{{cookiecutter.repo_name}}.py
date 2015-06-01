@@ -11,6 +11,9 @@ import sys
 import logging
 import argparse
 
+from core.{{cookiecutter.repo_name}} import {{cookiecutter.app_name}}, {{cookiecutter.app_name}}Exception
+from core.config import {{cookiecutter.app_name}}Conf
+
 
 class {{cookiecutter.app_name}}CommandLine(object):
     """
@@ -21,7 +24,8 @@ class {{cookiecutter.app_name}}CommandLine(object):
     CONFIG_PATH = os.path.relpath(os.path.join(HOME, 'conf'))
     {{cookiecutter.app_name.upper()}}_CONFIG = os.path.join(CONFIG_PATH, '{{cookiecutter.repo_name}}.json')
 
-    def parse_args(self):
+    @classmethod
+    def parse_args(cls):
         parser = argparse.ArgumentParser(description='{{cookiecutter.app_name}} Runtime',
                                          prog=__file__,
                                          add_help=False,
@@ -30,15 +34,15 @@ class {{cookiecutter.app_name}}CommandLine(object):
 
         m = parser.add_argument_group('Mandatory Arguments')
         g = m.add_mutually_exclusive_group(required=True)
-        g.add_argument('-foobar', metavar='', type=str, help='')
+        g.add_argument('-foob', metavar='foo', type=str, help='foo')
 
         o = parser.add_argument_group('Optional Arguments')
-        o.add_argument('-{{cookiecutter.repo_name}}', metavar='file', type=argparse.FileType(), default=self.{{cookiecutter.app_name.upper()}}_CONFIG,
+        o.add_argument('-{{cookiecutter.repo_name}}', metavar='file', type=argparse.FileType(), default=cls.{{cookiecutter.app_name.upper()}}_CONFIG,
                        help='{{cookiecutter.app_name}} configuration')
         o.add_argument('-verbosity', metavar='{1..5}', default=2, type=int, choices=list(range(1, 6, 1)),
                        help='Level of verbosity for logging module.')
         o.add_argument('-h', '-help', '--help', action='help', help=argparse.SUPPRESS)
-        o.add_argument('-version', action='version', version='%(prog)s {}'.format(self.VERSION), help=argparse.SUPPRESS)
+        o.add_argument('-version', action='version', version='%(prog)s {}'.format(cls.VERSION), help=argparse.SUPPRESS)
 
         return parser.parse_args()
 
@@ -46,8 +50,9 @@ class {{cookiecutter.app_name}}CommandLine(object):
     def pair_to_dict(args):
         return dict(kv.split('=', 1) for kv in args)
 
-    def main(self):
-        args = self.parse_args()
+    @classmethod
+    def main(cls):
+        args = cls.parse_args()
 
         logging.basicConfig(format='[{{cookiecutter.app_name}}] %(asctime)s %(levelname)s: %(message)s',
                             level=args.verbosity * 10,
