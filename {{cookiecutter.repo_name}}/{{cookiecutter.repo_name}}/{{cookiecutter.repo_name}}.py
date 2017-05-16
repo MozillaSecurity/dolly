@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -26,23 +26,43 @@ class {{cookiecutter.app_name}}CommandLine(object):
 
     @classmethod
     def parse_args(cls):
-        parser = argparse.ArgumentParser(description='{{cookiecutter.app_name}} Runtime',
-                                         prog=__file__,
-                                         add_help=False,
-                                         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-                                         epilog='The exit status is 0 for non-failures and 1 for failures.')
+        parser = argparse.ArgumentParser(
+            description='{{cookiecutter.app_name}} Runtime',
+            prog=__file__,
+            add_help=False,
+            formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+            epilog='The exit status is 0 for non-failures and 1 for failures.')
 
         m = parser.add_argument_group('Mandatory Arguments')
         g = m.add_mutually_exclusive_group(required=True)
-        g.add_argument('-foob', metavar='foo', type=str, help='foo')
+        g.add_argument(
+            '-foob',
+            metavar='foo',
+            type=str,
+            help='foo')
 
         o = parser.add_argument_group('Optional Arguments')
-        o.add_argument('-{{cookiecutter.repo_name}}', metavar='file', type=argparse.FileType(), default=cls.{{cookiecutter.app_name.upper()}}_CONFIG,
-                       help='{{cookiecutter.app_name}} configuration')
-        o.add_argument('-verbosity', metavar='{1..5}', default=2, type=int, choices=list(range(1, 6, 1)),
-                       help='Level of verbosity for logging module.')
-        o.add_argument('-h', '-help', '--help', action='help', help=argparse.SUPPRESS)
-        o.add_argument('-version', action='version', version='%(prog)s {}'.format(cls.VERSION), help=argparse.SUPPRESS)
+        o.add_argument(
+            '-{{cookiecutter.repo_name}}',
+            metavar='file', type=argparse.FileType(),
+            default=cls.{{cookiecutter.app_name.upper()}}_CONFIG,
+            help='{{cookiecutter.app_name}} configuration')
+        o.add_argument(
+            '-verbosity',
+            metavar='{1..5}',
+            default=2,
+            type=int,
+            choices=list(range(1, 6, 1)),
+            help='Level of verbosity for logging module.')
+        o.add_argument(
+            '-h', '-help', '--help',
+            action='help',
+            help=argparse.SUPPRESS)
+        o.add_argument(
+            '-version',
+            action='version',
+            version='%(prog)s {}'.format(cls.VERSION),
+            help=argparse.SUPPRESS)
 
         return parser.parse_args()
 
@@ -54,9 +74,10 @@ class {{cookiecutter.app_name}}CommandLine(object):
     def main(cls):
         args = cls.parse_args()
 
-        logging.basicConfig(format='[{{cookiecutter.app_name}}] %(asctime)s %(levelname)s: %(message)s',
-                            level=args.verbosity * 10,
-                            datefmt='%Y-%m-%d %H:%M:%S')
+        logging.basicConfig(
+            format='[{{cookiecutter.app_name}}] %(asctime)s %(levelname)s: %(message)s',
+            level=args.verbosity * 10,
+            datefmt='%Y-%m-%d %H:%M:%S')
 
         logging.info('Loading {{cookiecutter.app_name}} configuration from %s' % args.{{cookiecutter.repo_name}}.name)
         try:
