@@ -1,26 +1,29 @@
+![](http://people.mozilla.com/~cdiehl/screenshots/dolly/dolly.png)
 
-## Cookiecutter: Python Project
 
-A Cookiecutter project template for projects in Python.
+A cookie cutter project for Python projects.
+
 
 ### Getting Started
 
+```bash
     pip install cookiecutter
+    cookiecutter gh:mozillasecurity/dolly
+```
 
-    cookiecutter gh:posidron/cookiecutter-python-project
-
-Cookiecutter will ask for some basic info and generate a base Python project for you.
+Dolly will ask you for some basic project information and will then generate a base Python project for you with all the boilerplate.
 
 
 ### Publish to GitHub
 
-    cd <project_name>
-    git init
-    git add .
-    git commit -m "Introduce <project_name>"
-    git remote add origin git@github.com:<github_username>/<project_name>.git
-    git push -u origin master
-
+```bash
+cd <project_name>
+git init
+git add .
+git commit -m "Introduce <project_name>"
+git remote add origin git@github.com:<github_username>/<project_name>.git
+git push -u origin master
+```
 
 ### Features
 * Pre-configured setup for Travis.
