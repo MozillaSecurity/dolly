@@ -1,5 +1,5 @@
 
-##Cookiecutter: Python Project
+## Cookiecutter: Python Project
 
 A Cookiecutter project template for projects in Python.
 
