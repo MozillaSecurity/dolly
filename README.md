@@ -1,4 +1,4 @@
-![](http://people.mozilla.com/~cdiehl/screenshots/dolly/dolly.png)
+![Logo](https://github.com/posidron/posidron.github.io/raw/master/static/images/dolly.png)
 
 
 A cookie cutter project for Python projects.
